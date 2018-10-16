@@ -7,7 +7,7 @@ Simple gingonic middleware for Cache-Control headers on responses
 
 ```go
 import "github.com/lggomez/cachecontrol-lite/middleware"
-import "github.com/lggomez/cachecontrol-lite/cacheobject"
+import "github.com/lggomez/cachecontrol-lite/middleware/cacheobject"
 ```
 
 #### Add the middleware on your router
@@ -18,7 +18,7 @@ func mapUrlsToControllers(router *gin.Engine) {
 
     router.GET("/foo/:id",
         controller.Get,
-        cachecontrol.AddCacheControl(defaultCacheControlConfig),
+        middleware.AddCacheControl(defaultCacheControlConfig),
     )
     /* ... */
 }
