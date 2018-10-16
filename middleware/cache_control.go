@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/lggomez/cachecontrol-lite/cacheobject"
+	"github.com/lggomez/cachecontrol-lite/middleware/cacheobject"
 	"strconv"
 )
 
