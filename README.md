@@ -14,7 +14,7 @@ import "github.com/lggomez/cachecontrol-lite/middleware/cacheobject"
 ```go
 func mapUrlsToControllers(router *gin.Engine) {
     /* ... */
-    defaultCacheControlConfig := &cacheobject.ResponseCacheDirectives{MaxAge: cacheobject.DeltaSeconds(time.Hour * 24)}
+    defaultCacheControlConfig := &cacheobject.ResponseCacheDirectives{MaxAge: cacheobject.DeltaSeconds((time.Hour * 24).Seconds())}
 
     router.GET("/foo/:id",
         controller.Get,
