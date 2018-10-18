@@ -20,7 +20,8 @@ func AddCacheControl(directives *cacheobject.ResponseCacheDirectives) gin.Handle
 		if statusHeader != "" {
 			status, _ = strconv.Atoi(statusHeader)
 		}
-		if !c.IsAborted() && (status < 300) {
+		// Only cache valid 2xx requests
+		if !c.IsAborted() && ((status / 100) == 2) {
 			c.Header(CacheControlHeader, directives.BuildResponseHeader())
 		}
 	}
