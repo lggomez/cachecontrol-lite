@@ -4,6 +4,6 @@ go 1.14
 
 require (
 	github.com/gin-gonic/gin v1.7.4
-	github.com/go-chi/chi v1.5.4 // indirect
-	github.com/stretchr/testify v1.7.0 // indirect
+	github.com/go-chi/chi v1.5.4
+	github.com/stretchr/testify v1.7.0
 )
