@@ -610,5 +610,9 @@ func (cd *ResponseCacheDirectives) BuildResponseHeader() string {
 
 	headerTokens = append(headerTokens, cd.Extensions...)
 
-	return strings.Join(headerTokens, ", ")
+	if len(headerTokens) != 0 {
+		return strings.Join(headerTokens, ", ")
+	}
+
+	return ""
 }

@@ -45,6 +45,27 @@ func TestRequestCacheControl_2XX(t *testing.T) {
 	assert.Equal(t, string(data), "{\"foo\":\"bar\"}")
 }
 
+func TestRequestCacheControl_2XX_EmptyDirective(t *testing.T) {
+	recorder := httptest.NewRecorder()
+	_ = recorder.Header()
+
+	r := chi.NewRouter()
+	tw := &testWriter{http.StatusOK}
+	r.Get("/", WithCacheControl(tw.Handle, &cacheobject.ResponseCacheDirectives{}))
+
+	req, _ := http.NewRequest("GET", "/", nil)
+
+	r.ServeHTTP(recorder, req)
+	res := recorder.Result()
+
+	require.NotNil(t, res)
+	assert.Equal(t, res.StatusCode, http.StatusOK)
+	assert.Equal(t, recorder.Header().Get("Cache-Control"), "")
+
+	data, _ := ioutil.ReadAll(recorder.Body)
+	assert.Equal(t, string(data), "{\"foo\":\"bar\"}")
+}
+
 func TestRequestCacheControl_400(t *testing.T) {
 	recorder := httptest.NewRecorder()
 	_ = recorder.Header()

@@ -12,7 +12,9 @@ func WithCacheControl(directives *cacheobject.ResponseCacheDirectives) gin.Handl
 		status := c.Writer.Status()
 		// Emit header only for valid 2xx requests
 		if !c.IsAborted() && (status >= 200 && status <= 299) {
-			c.Header(middleware.CacheControlHeader, directives.BuildResponseHeader())
+			if dir := directives.BuildResponseHeader(); dir != "" {
+				c.Header(middleware.CacheControlHeader, dir)
+			}
 		}
 	}
 }

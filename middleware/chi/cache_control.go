@@ -18,7 +18,9 @@ func WithCacheControl(handler http.HandlerFunc, directives *cacheobject.Response
 		status := ww.Status()
 		// Emit header only for valid 2xx requests
 		if status >= 200 && status <= 299 {
-			ww.Header().Add(middleware.CacheControlHeader, directives.BuildResponseHeader())
+			if dir := directives.BuildResponseHeader(); dir != "" {
+				ww.Header().Add(middleware.CacheControlHeader, dir)
+			}
 		}
 	}
 }
